@@ -57,7 +57,7 @@ class GoodWeApi:
             status = self.statusText(inverterData['status'])
             if status == 'Normal':
                 result['status'] = status
-                result['pgrid_w'] += inverterData['out_pac']
+                result['pgrid_w'] += inverterData['load']
                 result['grid_voltage'] += self.parseValue(inverterData['output_voltage'], 'V')
                 result['pv_voltage'] += self.calcPvVoltage(inverterData['d'])
                 count += 1
@@ -71,7 +71,7 @@ class GoodWeApi:
             # We have no online inverters, then just pick the first
             inverterData = data['inverter'][0]
             result['status'] = self.statusText(inverterData['status'])
-            result['pgrid_w'] = inverterData['out_pac']
+            result['pgrid_w'] = inverterData['load']
             result['grid_voltage'] = self.parseValue(inverterData['output_voltage'], 'V')
             result['pv_voltage'] = self.calcPvVoltage(inverterData['d'])
 
